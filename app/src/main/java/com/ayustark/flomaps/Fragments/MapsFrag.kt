@@ -44,8 +44,6 @@ import java.net.URISyntaxException
 
 class MapsFrag : Fragment(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
-    private val accessLocation = 123
-    private val REQUEST_GPS_REQUEST = 321
     private var location: Location? = null
     private lateinit var mSocket: Socket
     private var binding: FragmentMapsBinding? = null
@@ -82,53 +80,12 @@ class MapsFrag : Fragment(), OnMapReadyCallback {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-/*
-        requestPermissionLauncher =
-            registerForActivityResult(
-                ActivityResultContracts.RequestPermission()
-            ) { isGranted: Boolean ->
-                if (isGranted) {
-                    // Permission is granted. Continue the action or workflow in your
-                    // app.
-                } else {
-                    // Explain to the user that the feature is unavailable because the
-                    // features requires a permission that the user has denied. At the
-                    // same time, respect the user's decision. Don't link to system
-                    // settings in an effort to convince the user to change their
-                    // decision.
-                }
-            }
-*/
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { isGranted ->
-            Log.e("RequestPermission", isGranted.keys.size.toString())
-//            if (isGranted[])
-        }
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-            Log.e("RequestPermission", isGranted.toString())
-//            if (isGranted[])
-        }
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            Log.e("RESULT", it.data.toString())
-        }
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMapsBinding.inflate(inflater, container, false)
-        /*try {
-            mSocket = IO.socket(
-                "https://node-flo-api.vercel.app", IO.Options.builder().setHost(
-                    "https://node-flo-api.vercel.app"
-                ).build()
-            )
-        } catch (err: URISyntaxException) {
-            Log.e("Socket Error", "${err.reason} ${err.message}")
-        }*/
         mSocket.connect()
         Log.e("SOCKET1", mSocket.connected().toString())
         return binding?.root
@@ -151,9 +108,7 @@ class MapsFrag : Fragment(), OnMapReadyCallback {
         val task = client.checkLocationSettings(builder.build())
         task.addOnSuccessListener {
             getUserLocation()
-            // All location settings are satisfied. The client can initialize
-            // location requests here.
-            // ...
+
         }
         task.addOnFailureListener {
             if (it is ResolvableApiException) {
@@ -176,10 +131,6 @@ class MapsFrag : Fragment(), OnMapReadyCallback {
             != PackageManager.PERMISSION_GRANTED
         ) {
             requestPermissionLauncher.launch(android.Manifest.permission.ACCESS_FINE_LOCATION)
-            /*requestPermissions(
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                accessLocation
-            )*/
             return
         }
         checkGPS()
@@ -249,33 +200,12 @@ class MapsFrag : Fragment(), OnMapReadyCallback {
 
     }
 
-/*
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        when (requestCode) {
-            accessLocation -> if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                checkGPS()
-            } else {
-                Toast.makeText(activity, "No access to User Location", Toast.LENGTH_LONG).show()
-                //finishAffinity()
-            }
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
-*/
-
-//    registerForActivityResult
-
-    private fun showToast(msg:String){
-        Toast.makeText(activity,msg,Toast.LENGTH_SHORT).show()
+    private fun showToast(msg: String) {
+        Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show()
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        // Add a marker in Sydney and move the camera
     }
 
     override fun onDestroyView() {
@@ -284,7 +214,6 @@ class MapsFrag : Fragment(), OnMapReadyCallback {
     }
 
     override fun onDestroy() {
-//        mSocket.emit("disconnect")
         mSocket.disconnect()
         super.onDestroy()
     }
