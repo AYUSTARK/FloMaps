@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/blue_A700</color>
+    <color name="textColor">@color/white</color>
+    <color name="textColor2">@color/white</color>
+    <color name="background">@color/dark_surface2</color>
+    <color name="cardBackground">@color/grey_900</color>
+    <color name="dividerBackground">@color/whiteBack</color>
+    <color name="textBorder">#AAAAAA</color>
+    <color name="hintTextColor">@color/grey_400</color>
+    <color name="navigationHeader">@color/whiteBack</color>
+    <color name="noteColor">@color/overlay_light_90</color>
+    <color name="statusText">@color/black</color>
+    <color name="borderColor">@color/white</color>
+    <color name="syllabusItem">@color/dark_overlay</color>
+</resources>
