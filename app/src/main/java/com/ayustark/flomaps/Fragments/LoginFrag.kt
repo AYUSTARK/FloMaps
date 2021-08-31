@@ -8,21 +8,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.ayustark.flomaps.Api.ApiHelper
 import com.ayustark.flomaps.Api.ApiManager
 import com.ayustark.flomaps.Models.LoginModel
 import com.ayustark.flomaps.R
+import com.ayustark.flomaps.base.ViewModelFactory
 import com.ayustark.flomaps.databinding.FragmentLoginBinding
-import com.ayustark.flomaps.utils.Resource
+import com.ayustark.flomaps.repository.MainRepository
 import com.ayustark.flomaps.utils.Status.*
+import com.ayustark.flomaps.viewmodel.MainViewModel
 
 class LoginFrag : Fragment() {
     private var binding: FragmentLoginBinding? = null
     private val bind get() = binding!!
     private lateinit var sharedP: SharedPreferences
+    private lateinit var mainViewModel: MainViewModel
+    private lateinit var repository: MainRepository
     private var navigator: NavController? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,13 +36,14 @@ class LoginFrag : Fragment() {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         sharedP = requireContext().getSharedPreferences("Login", MODE_PRIVATE)
         navigator = activity?.findNavController(R.id.navHost)
-        if (sharedP.getBoolean("isLogged",false)){
+        /*if (sharedP.getBoolean("isLogged", false)) {
             navigator?.navigate(R.id.loginToMapsFrag)
-        }
+        }*/
+        setupViewModel()
+//        setupObserver()
         bind.btnLogin.setOnClickListener {
             if (bind.phoneLayout.editText?.text?.length == 10) {
                 if (bind.otpLayout.editText?.text?.length == 6) {
-
                     login(
                         LoginModel(
                             bind.phoneLayout.editText?.text.toString(),
@@ -57,8 +62,27 @@ class LoginFrag : Fragment() {
 
     private fun login(loginModel: LoginModel) {
         if (loginModel.phoneNumber.isNotBlank() && loginModel.otp.isNotBlank()) {
-            val user = MutableLiveData<Resource<Boolean>>()
-            ApiHelper(ApiManager).login(loginModel, user)
+//            val user = MutableLiveData<Resource<Boolean>>()
+            mainViewModel.getLogin(loginModel).observe(viewLifecycleOwner, {
+                when (it.status) {
+                    SUCCESS -> {
+                        if (it.data == true) {
+                            showToast("Logged in Successfully")
+                            sharedP.edit().putBoolean("isLogged", true).apply()
+                            navigator?.navigate(R.id.loginToMapsFrag)
+                        } else {
+                            showToast("Invalid Credentials")
+                        }
+                    }
+                    ERROR -> {
+                        showToast(it.message.toString())
+                    }
+                    LOADING -> {
+
+                    }
+                }
+            })
+            /*ApiHelper(ApiManager).login(loginModel, user)
             user.observe(viewLifecycleOwner, {
                 when (it.status) {
                     SUCCESS -> {
@@ -77,8 +101,16 @@ class LoginFrag : Fragment() {
 
                     }
                 }
-            })
+            })*/
         }
+    }
+
+    private fun setupViewModel() {
+        repository = MainRepository(ApiHelper(ApiManager))
+        mainViewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(repository)
+        ).get(MainViewModel::class.java)
     }
 
     private fun showToast(msg: String) {

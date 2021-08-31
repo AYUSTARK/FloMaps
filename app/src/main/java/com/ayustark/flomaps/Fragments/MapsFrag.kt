@@ -108,7 +108,6 @@ class MapsFrag : Fragment(), OnMapReadyCallback {
         val task = client.checkLocationSettings(builder.build())
         task.addOnSuccessListener {
             getUserLocation()
-
         }
         task.addOnFailureListener {
             if (it is ResolvableApiException) {

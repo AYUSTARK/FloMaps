@@ -15,12 +15,13 @@ class ApiHelper(private val apiManager: ApiManager) {
 
     fun login(login: LoginModel, user: MutableLiveData<Resource<Boolean>>) {
         try {
+            user.postValue(Resource.loading(false))
             apiManager.apiService.login(login).enqueue(object : Callback<Map<String, Boolean>> {
                 override fun onResponse(
                     call: Call<Map<String, Boolean>>,
                     response: Response<Map<String, Boolean>>
                 ) {
-                    Log.d("Response", "${response.body()}")
+                    Log.d("Response", "${response.body()?.get("validUser")}")
                     user.postValue(Resource.success(response.body()?.get("validUser")))
                 }
 
