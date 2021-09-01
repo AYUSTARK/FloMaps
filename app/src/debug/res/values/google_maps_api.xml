@@ -9,7 +9,7 @@
     You can also add your credentials to an existing key, using these values:
 
     Package name:
-    com.ayustark.flomaps.Fragments
+    com.ayustark.flomaps.ui.main.Fragments
 
     SHA-1 certificate fingerprint:
     39:78:25:F5:90:11:B8:D4:22:88:AB:84:D8:01:9E:E7:CC:98:94:66

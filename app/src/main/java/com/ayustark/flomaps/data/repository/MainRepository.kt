@@ -1,12 +1,12 @@
 //
 //Programmed by Ayustark
 //
-package com.ayustark.flomaps.repository
+package com.ayustark.flomaps.data.repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.ayustark.flomaps.Api.ApiHelper
-import com.ayustark.flomaps.Models.LoginModel
+import com.ayustark.flomaps.data.Api.ApiHelper
+import com.ayustark.flomaps.data.Models.LoginModel
 import com.ayustark.flomaps.utils.Resource
 
 class MainRepository(

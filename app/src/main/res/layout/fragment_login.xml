@@ -4,7 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Fragments.LoginFrag">
+        tools:context=".ui.main.Fragments.LoginFrag">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:focusable="true"
-                android:hint="Enter Mobile Number"
+                android:hint="@string/enter_mobile_number"
                 android:textColorHint="@color/hintTextColor"
                 app:hintTextColor="@color/themeBlue"
                 app:startIconDrawable="@drawable/ic_phone"
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:focusable="true"
-                android:hint="Enter OTP"
+                android:hint="@string/enter_otp"
                 android:layout_marginTop="20dp"
                 android:textColorHint="@color/hintTextColor"
                 app:hintTextColor="@color/themeBlue"
@@ -66,7 +66,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/btn_pressed_round"
-                android:text="Login"
+                android:text="@string/login"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"

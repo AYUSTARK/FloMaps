@@ -1,4 +1,4 @@
-package com.ayustark.flomaps.Fragments
+package com.ayustark.flomaps.ui.main.Fragments
 
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
@@ -11,15 +11,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import com.ayustark.flomaps.Api.ApiHelper
-import com.ayustark.flomaps.Api.ApiManager
-import com.ayustark.flomaps.Models.LoginModel
+import com.ayustark.flomaps.data.Api.ApiHelper
+import com.ayustark.flomaps.data.Api.ApiManager
+import com.ayustark.flomaps.data.Models.LoginModel
 import com.ayustark.flomaps.R
-import com.ayustark.flomaps.base.ViewModelFactory
+import com.ayustark.flomaps.ui.base.ViewModelFactory
 import com.ayustark.flomaps.databinding.FragmentLoginBinding
-import com.ayustark.flomaps.repository.MainRepository
+import com.ayustark.flomaps.data.repository.MainRepository
 import com.ayustark.flomaps.utils.Status.*
-import com.ayustark.flomaps.viewmodel.MainViewModel
+import com.ayustark.flomaps.ui.main.viewmodel.MainViewModel
 
 class LoginFrag : Fragment() {
     private var binding: FragmentLoginBinding? = null
@@ -36,9 +36,9 @@ class LoginFrag : Fragment() {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         sharedP = requireContext().getSharedPreferences("Login", MODE_PRIVATE)
         navigator = activity?.findNavController(R.id.navHost)
-        /*if (sharedP.getBoolean("isLogged", false)) {
+        if (sharedP.getBoolean("isLogged", false)) {
             navigator?.navigate(R.id.loginToMapsFrag)
-        }*/
+        }
         setupViewModel()
 //        setupObserver()
         bind.btnLogin.setOnClickListener {
@@ -62,7 +62,6 @@ class LoginFrag : Fragment() {
 
     private fun login(loginModel: LoginModel) {
         if (loginModel.phoneNumber.isNotBlank() && loginModel.otp.isNotBlank()) {
-//            val user = MutableLiveData<Resource<Boolean>>()
             mainViewModel.getLogin(loginModel).observe(viewLifecycleOwner, {
                 when (it.status) {
                     SUCCESS -> {

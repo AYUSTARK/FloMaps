@@ -1,4 +1,4 @@
-package com.ayustark.flomaps.Models
+package com.ayustark.flomaps.data.Models
 
 data class LoginModel(
     val phoneNumber:String,

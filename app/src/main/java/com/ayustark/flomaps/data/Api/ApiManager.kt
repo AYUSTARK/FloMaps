@@ -1,7 +1,7 @@
 //
 //Programmed by Ayustark
 //
-package com.ayustark.flomaps.Api
+package com.ayustark.flomaps.data.Api
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

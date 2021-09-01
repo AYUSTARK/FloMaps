@@ -1,9 +1,9 @@
-package com.ayustark.flomaps.base
+package com.ayustark.flomaps.ui.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.ayustark.flomaps.repository.MainRepository
-import com.ayustark.flomaps.viewmodel.MainViewModel
+import com.ayustark.flomaps.data.repository.MainRepository
+import com.ayustark.flomaps.ui.main.viewmodel.MainViewModel
 
 class ViewModelFactory(private val repository: MainRepository) :
     ViewModelProvider.Factory {

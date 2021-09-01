@@ -1,4 +1,4 @@
-package com.ayustark.flomaps.viewmodel
+package com.ayustark.flomaps.ui.main.viewmodel
 
 import android.util.Log
 import androidx.databinding.Observable
@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ayustark.flomaps.Models.LoginModel
-import com.ayustark.flomaps.repository.MainRepository
+import com.ayustark.flomaps.data.Models.LoginModel
+import com.ayustark.flomaps.data.repository.MainRepository
 import com.ayustark.flomaps.utils.Resource
 import kotlinx.coroutines.launch
 

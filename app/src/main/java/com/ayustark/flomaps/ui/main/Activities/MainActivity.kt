@@ -1,4 +1,4 @@
-package com.ayustark.flomaps.Activities
+package com.ayustark.flomaps.ui.main.Activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -1,4 +1,4 @@
-package com.ayustark.flomaps.Fragments
+package com.ayustark.flomaps.ui.main.Fragments
 
 import android.app.Activity
 import android.content.Context

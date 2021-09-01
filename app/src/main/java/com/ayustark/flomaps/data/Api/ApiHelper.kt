@@ -1,11 +1,11 @@
 //
 //Programmed by Ayustark
 //
-package com.ayustark.flomaps.Api
+package com.ayustark.flomaps.data.Api
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.ayustark.flomaps.Models.LoginModel
+import com.ayustark.flomaps.data.Models.LoginModel
 import com.ayustark.flomaps.utils.Resource
 import retrofit2.Call
 import retrofit2.Callback
